@@ -5,6 +5,7 @@ import { createDataStoreSlice, DataStore } from "./_dataStore";
 import { createMapStoreSlice, MapStore } from "./_mapStore";
 import React from "react";
 import { getRealmUIPosition } from "../../utils/utils";
+import { BuildModeStore, createBuildModeStoreSlice } from "./_buildModeStore";
 export type Background = "map" | "realmView" | "combat" | "bastion";
 
 interface UIStore {
@@ -53,7 +54,7 @@ interface UIStore {
   setHighlightColor: (color: number) => void;
 }
 
-const useUIStore = create<UIStore & PopupsStore & DataStore & MapStore>((set) => ({
+const useUIStore = create<UIStore & PopupsStore & DataStore & MapStore & BuildModeStore>((set) => ({
   theme: "light",
   setTheme: (theme) => set({ theme }),
   showBlurOverlay: false,
@@ -215,6 +216,7 @@ const useUIStore = create<UIStore & PopupsStore & DataStore & MapStore>((set) =>
   ...createPopupsSlice(set),
   ...createDataStoreSlice(set),
   ...createMapStoreSlice(set),
+  ...createBuildModeStoreSlice(set),
 }));
 
 export default useUIStore;
