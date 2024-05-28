@@ -4,6 +4,13 @@ export enum Winner {
   Target = "Target",
 }
 
+/// STAMINA
+export interface Stamina {
+  entityId: bigint;
+  max: number;
+  currentValue: number;
+}
+
 export enum DESTINATION_TYPE {
   HOME,
   HYPERSTRUCTURE,

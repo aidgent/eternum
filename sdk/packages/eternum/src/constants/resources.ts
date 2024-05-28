@@ -557,6 +557,12 @@ export const WEIGHTS: {
   [ResourcesIds.Fish]: 0.1,
 };
 
+export const UNIT_STAMINA: { [key: number]: number } = {
+  [ResourcesIds.Paladin]: 15,
+  [ResourcesIds.Knight]: 10,
+  [ResourcesIds.Crossbowmen]: 10,
+};
+
 export const RESOURCE_TIERS = {
   lords: [ResourcesIds.Lords, ResourcesIds.Earthenshard],
   military: [ResourcesIds.Knight, ResourcesIds.Crossbowmen, ResourcesIds.Paladin],

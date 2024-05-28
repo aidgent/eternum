@@ -155,6 +155,15 @@ export function getBuildingType(name: BuildingType): CairoCustomEnum {
   }
 }
 
+export function updateStamina(stamina: Stamina, unitType: number): Stamina {
+  const maxStamina = UNIT_STAMINA[unitType] || 0;
+  return {
+    ...stamina,
+    max: maxStamina,
+    currentValue: Math.min(stamina.currentValue, maxStamina),
+  };
+}
+
 export function getProducedResource(name: BuildingType): number {
   switch (name) {
     case BuildingType.Castle:
@@ -202,12 +211,18 @@ export enum EntityState {
   NotApplicable, // When the entity should not be rendered
 }
 
+import { Stamina } from "../types/common";
+
 export function determineEntityState(
   nextBlockTimestamp: number | undefined,
   blocked: boolean | undefined,
   arrivalTime: number | undefined,
   hasResources: boolean,
+  stamina: Stamina | undefined,
 ): EntityState {
+  if (stamina && stamina.currentValue <= 0) {
+    return EntityState.Idle;
+  }
   const isTraveling =
     !blocked && nextBlockTimestamp !== undefined && arrivalTime !== undefined && arrivalTime > nextBlockTimestamp;
   const isWaitingForDeparture = blocked;
